@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -16,13 +17,13 @@ public class CatDAOImpl implements CatDAO {
     private EntityManager entityManager;
 
     @Override
-    @Transactional
-    public List<Cat> getAllCats() {
+    public List<Cat> getTopCats() {
 
         Session session = entityManager.unwrap(Session.class);
-        List<Cat> allCats = session.createQuery("from Cat", Cat.class).getResultList();
+        List<Cat> topCats = session.createQuery("from Cat", Cat.class).getResultList();
+        Collections.sort(topCats, Collections.reverseOrder());
 
-        return allCats;
+        return topCats;
     }
 }
 

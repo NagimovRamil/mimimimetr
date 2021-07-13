@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "cats")
-public class Cat {
+public class Cat implements Comparable<Cat>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -47,6 +47,11 @@ public class Cat {
 
     public void setScore(String score) {
         this.score = score;
+    }
+
+    @Override
+    public int compareTo(Cat cat) {
+        return score.compareTo(cat.getScore());
     }
 }
 

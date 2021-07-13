@@ -40,10 +40,11 @@
     <tr>
         <th>Имя</th>
         <th>Счет</th>
+
     </tr>
 
 <!--    <tr th:each="cat : ${allCats}">-->
-    <tr th:each="cat,iterStat: ${allCats}" th:if="${iterStat.index} <10">
+    <tr th:each="cat,iterStat: ${topCats}" th:if="${iterStat.index} <10">
         <td th:text="${cat.cats_name}"> </td>
         <td th:text="${cat.score}"> </td>
     </tr> <!-- iterStat переменная для указания количества перебираемых элементов, в нашем случае ограничение 10>-->
