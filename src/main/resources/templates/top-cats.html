@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:text-align="http://www.w3.org/1999/xhtml">
 <head> 
     <title>Getting Started: Serving Web Content</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -30,13 +30,20 @@
     .kotiki tbody tr:nth-child(-n+1):before {
         content: "";
     }
+    .kotiki {margin:0 auto; text-align:center;}
 </style>
 
-<h1 align="center">Мимимиметр</h1>
-<h3 align="center">Топ 10</h3>
-<br>
+<!--div {width:400px; text-align:center;}-->
+<!--table {margin: 0 auto;}-->
+<!--table td {text-align: left;}-->
+<div style="text-align: center;">
+    <h1 style="font-family:'Comic Sans MS',sans-serif;">Мимимиметр</h1>
+    <h3 style="font-family:'Comic Sans MS',sans-serif;" text-align:center;>Топ 10</h3>
+</div>
 
-<table class="kotiki" align="center">
+<br>
+<!--align="center"-->
+<table class="kotiki" style="font-family:'Comic Sans MS',sans-serif;">
     <tr>
         <th>Имя</th>
         <th>Счет</th>
