@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class CatDAOImpl implements CatDAO {
@@ -20,10 +21,19 @@ public class CatDAOImpl implements CatDAO {
     public List<Cat> getTopCats() {
 
         Session session = entityManager.unwrap(Session.class);
-        List<Cat> topCats = session.createQuery("from Cat", Cat.class).getResultList();
-        Collections.sort(topCats, Collections.reverseOrder());
+        List<Cat> allCats = session.createQuery("from Cat", Cat.class).getResultList();
+        Collections.sort(allCats, Collections.reverseOrder());
+        List<Cat> topCats = allCats.stream().limit(10).collect(Collectors.toList());
 
         return topCats;
+    }
+    @Override
+    public List<Cat> getAllCats() {
+
+        Session session = entityManager.unwrap(Session.class);
+        List<Cat> allCats = session.createQuery("from Cat", Cat.class).getResultList();
+
+        return allCats;
     }
 }
 

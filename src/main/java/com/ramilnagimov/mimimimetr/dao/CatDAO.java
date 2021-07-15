@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CatDAO {
     public List<Cat> getTopCats();
+    public List<Cat> getAllCats();
 }

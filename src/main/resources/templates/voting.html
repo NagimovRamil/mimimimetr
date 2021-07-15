@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head> 
+    <title>Mimimimetr</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<style>
+    .twoCat {margin:0 auto; text-align:center;}
+</style>
+
+
+
+<div style="text-align: center;">
+    <h1>
+        <p style="font-family:'Comic Sans MS',sans-serif;">Мимимиметр</p>
+    </h1>
+    <br>
+    <br>
+    <h3>
+        <p style="font-family:'Comic Sans MS',sans-serif;">Кто из них мимимишнее? Кликни по фотографии!</p>
+    </h3>
+</div>
+<div class="twoCat">
+    <th:block>
+        <div style="display: inline-block">
+            <div class="center">
+                <input th:id="${cat1.id}" type="button" th:value="${cat1.cats_name}" onclick="voting(this.id)">
+            </div>
+        </div>
+    </th:block>
+
+    <th:block>
+        <div style="display: inline-block">
+            <div class="center">
+                <input th:id="${cat2.id}" type="button" th:value="${cat2.cats_name}" onclick="voting(this.id)">
+            </div>
+        </div>
+    </th:block>
+</div>
+<!--<table class="twoCat" style="font-family:'Comic Sans MS',sans-serif;">-->
+
+<!--        <a th:href="@{voting.html}"><td th:text="${catQueue1.poll().cats_name}">Click here</td></a>-->
+<!--        <a th:href="@{voting.html}"><td th:text="${catQueue2.poll().cats_name}">Click here</td></a>-->
+
+        <!--        <td th:href="@{/voting}">${catQueue2.poll().cats_name}</td>-->
+        <!--        <td th:text="${catQueue2.poll().cats_name}"> </td>-->
+
+<!--        <td th:text="${catQueue1.poll().cats_name}"><a th:href="@{/voting}"></a></td>-->
+<!--        <td th:text="${catQueue2.poll().cats_name}"><a th:href="@{/voting}"></a></td>-->
+
+        <!--        -->
+<!--        <a th:href="@{http://localhost:8080/voting}">here</a>-->
+
+<!--        <td><a th:href="@{/voting}"></a>-->
+<!--                th:text="${catQueue1.poll().cats_name}"-->
+<!--        </td>-->
+</table>
+</body>
+
+<script>
+    function voting(clickedID) {
+        // sendRequest(clickedID, '/voting');
+        location.reload();
+    }
+</script>
+
+</html>

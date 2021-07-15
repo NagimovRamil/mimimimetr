@@ -1,6 +1,7 @@
 package com.ramilnagimov.mimimimetr.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "cats")
@@ -52,6 +53,19 @@ public class Cat implements Comparable<Cat>{
     @Override
     public int compareTo(Cat cat) {
         return score.compareTo(cat.getScore());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cat cat = (Cat) o;
+        return id == cat.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
 

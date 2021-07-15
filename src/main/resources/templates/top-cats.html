@@ -1,12 +1,10 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:text-align="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head> 
-    <title>Getting Started: Serving Web Content</title> 
+    <title>Mimimimetr</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-
-<!--    <p th:text="'Hello, ' +  '!'" />-->
 
 <style>
     .kotiki {
@@ -33,24 +31,18 @@
     .kotiki {margin:0 auto; text-align:center;}
 </style>
 
-<!--div {width:400px; text-align:center;}-->
-<!--table {margin: 0 auto;}-->
-<!--table td {text-align: left;}-->
 <div style="text-align: center;">
     <h1 style="font-family:'Comic Sans MS',sans-serif;">Мимимиметр</h1>
-    <h3 style="font-family:'Comic Sans MS',sans-serif;" text-align:center;>Топ 10</h3>
+    <h3 style="font-family:'Comic Sans MS',sans-serif;">Топ 10</h3>
 </div>
-
 <br>
-<!--align="center"-->
+
 <table class="kotiki" style="font-family:'Comic Sans MS',sans-serif;">
     <tr>
         <th>Имя</th>
         <th>Счет</th>
-
     </tr>
 
-<!--    <tr th:each="cat : ${allCats}">-->
     <tr th:each="cat,iterStat: ${topCats}" th:if="${iterStat.index} <10">
         <td th:text="${cat.cats_name}"> </td>
         <td th:text="${cat.score}"> </td>
