@@ -2,11 +2,10 @@ package com.ramilnagimov.mimimimetr.dao;
 
 import com.ramilnagimov.mimimimetr.entity.Cat;
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,19 +13,23 @@ import java.util.stream.Collectors;
 @Repository
 public class CatDAOImpl implements CatDAO {
 
-    @Autowired
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
+
+    public CatDAOImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     @Override
     public List<Cat> getTopCats() {
 
         Session session = entityManager.unwrap(Session.class);
         List<Cat> allCats = session.createQuery("from Cat", Cat.class).getResultList();
-        Collections.sort(allCats, Collections.reverseOrder());
+        allCats.sort(Collections.reverseOrder());
         List<Cat> topCats = allCats.stream().limit(10).collect(Collectors.toList());
 
         return topCats;
     }
+
     @Override
     public List<Cat> getAllCats() {
 
@@ -34,6 +37,27 @@ public class CatDAOImpl implements CatDAO {
         List<Cat> allCats = session.createQuery("from Cat", Cat.class).getResultList();
 
         return allCats;
+    }
+
+    @Override
+    public void updateCatScore(int id) {
+
+        Session session = entityManager.unwrap(Session.class);
+        Cat cat = session.createQuery("from Cat where id =: id", Cat.class).uniqueResult();
+        cat.setScore(cat.getScore() + 1);
+        Query query = session.createQuery("Update Cat SET score =: score where id =: id");
+        query.setParameter("score", getCatsScoreByID(id) + 1);
+        query.executeUpdate();
+    }
+
+    @Override
+    public int getCatsScoreByID(int id) {
+        int score;
+        Session session = entityManager.unwrap(Session.class);
+        Cat cat = session.load(Cat.class, id);
+        score = cat.getScore();
+
+        return score;
     }
 }
 

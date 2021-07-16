@@ -1,34 +1,42 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head> 
+<head>
     <title>Mimimimetr</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 
 <style>
     .kotiki {
         border-collapse: collapse;
-        counter-reset: schetchik;  /* счётчик с названием "schetchik" работает в рамках класса .kotiki  */
+        counter-reset: schetchik; /* счётчик с названием "schetchik" работает в рамках класса .kotiki  */
     }
+
     .kotiki tbody tr:nth-child(n+2) {
         counter-increment: schetchik;
     }
+
     .kotiki td,
     .kotiki tr:before {
         padding: .1em .5em;
         border: 1px solid #E7D5C0;
     }
+
     .kotiki tr:before {
-        content: counter(schetchik);  /* значение счётчика с названием "schetchik" записывается в первую клетку строки */
+        content: counter(schetchik); /* значение счётчика с названием "schetchik" записывается в первую клетку строки */
         display: table-cell;
         vertical-align: middle;
         color: #978777;
     }
+
     .kotiki tbody tr:nth-child(-n+1):before {
         content: "";
     }
-    .kotiki {margin:0 auto; text-align:center;}
+
+    .kotiki {
+        margin: 0 auto;
+        text-align: center;
+    }
 </style>
 
 <div style="text-align: center;">
@@ -44,8 +52,8 @@
     </tr>
 
     <tr th:each="cat,iterStat: ${topCats}" th:if="${iterStat.index} <10">
-        <td th:text="${cat.cats_name}"> </td>
-        <td th:text="${cat.score}"> </td>
+        <td th:text="${cat.cats_name}"></td>
+        <td th:text="${cat.score}"></td>
     </tr> <!-- iterStat переменная для указания количества перебираемых элементов, в нашем случае ограничение 10>-->
 
 </table>

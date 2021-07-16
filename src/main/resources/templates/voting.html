@@ -1,16 +1,17 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head> 
+<head>
     <title>Mimimimetr</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 
 <style>
-    .twoCat {margin:0 auto; text-align:center;}
+    .twoCat {
+        margin: 0 auto;
+        text-align: center;
+    }
 </style>
-
-
 
 <div style="text-align: center;">
     <h1>
@@ -39,30 +40,19 @@
         </div>
     </th:block>
 </div>
-<!--<table class="twoCat" style="font-family:'Comic Sans MS',sans-serif;">-->
-
-<!--        <a th:href="@{voting.html}"><td th:text="${catQueue1.poll().cats_name}">Click here</td></a>-->
-<!--        <a th:href="@{voting.html}"><td th:text="${catQueue2.poll().cats_name}">Click here</td></a>-->
-
-        <!--        <td th:href="@{/voting}">${catQueue2.poll().cats_name}</td>-->
-        <!--        <td th:text="${catQueue2.poll().cats_name}"> </td>-->
-
-<!--        <td th:text="${catQueue1.poll().cats_name}"><a th:href="@{/voting}"></a></td>-->
-<!--        <td th:text="${catQueue2.poll().cats_name}"><a th:href="@{/voting}"></a></td>-->
-
-        <!--        -->
-<!--        <a th:href="@{http://localhost:8080/voting}">here</a>-->
-
-<!--        <td><a th:href="@{/voting}"></a>-->
-<!--                th:text="${catQueue1.poll().cats_name}"-->
-<!--        </td>-->
 </table>
 </body>
 
 <script>
-    function voting(clickedID) {
-        // sendRequest(clickedID, '/voting');
+    function voting(ID) {
+        sendRequest(ID, '/voting');
         location.reload();
+    }
+
+    function sendRequest(data, url) {
+        var upScore = new XMLHttpRequest();
+        upScore.open('POST', url, false);
+        upScore.send(data);
     }
 </script>
 

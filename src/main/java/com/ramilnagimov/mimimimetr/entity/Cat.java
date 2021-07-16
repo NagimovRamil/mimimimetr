@@ -5,32 +5,32 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "cats")
-public class Cat implements Comparable<Cat>{
+public class Cat implements Comparable<Cat> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "cats_name")
     private String cats_name;
 
     @Column(name = "score")
-    private String score;
+    private Integer score;
 
     public Cat() {
     }
 
-    public Cat(int id, String cats_name, String score) {
+    public Cat(Long id, String cats_name, int score) {
         this.id = id;
         this.cats_name = cats_name;
         this.score = score;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -42,17 +42,17 @@ public class Cat implements Comparable<Cat>{
         this.cats_name = cats_name;
     }
 
-    public String getScore() {
+    public int getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(int score) {
         this.score = score;
     }
 
     @Override
     public int compareTo(Cat cat) {
-        return score.compareTo(cat.getScore());
+        return score.compareTo(cat.score);
     }
 
     @Override
@@ -60,12 +60,13 @@ public class Cat implements Comparable<Cat>{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cat cat = (Cat) o;
-        return id == cat.id;
+        return id.equals(cat.id) &&
+                Objects.equals(cats_name, cat.cats_name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, cats_name);
     }
 }
 
