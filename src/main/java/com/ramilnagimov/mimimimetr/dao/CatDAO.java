@@ -9,7 +9,7 @@ public interface CatDAO {
 
     List<Cat> getAllCats();
 
-    void updateCatScore(int id);
+    void updateCatScore(Long id);
 
-    int getCatsScoreByID(int id);
+    int getCatsScoreByID(Long id);
 }

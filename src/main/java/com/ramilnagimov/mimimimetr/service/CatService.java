@@ -11,5 +11,5 @@ public interface CatService {
 
     List<Cat> getListOfCats();
 
-    void updateCatScore(int id);
+    void updateCatScore(Long id);
 }

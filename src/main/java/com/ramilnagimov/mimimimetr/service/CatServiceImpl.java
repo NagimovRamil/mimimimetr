@@ -42,7 +42,7 @@ public class CatServiceImpl implements CatService {
 
     @Override
     @Transactional
-    public void updateCatScore(int id) {
+    public void updateCatScore(Long id) {
         catDAO.updateCatScore(id);
     }
 }

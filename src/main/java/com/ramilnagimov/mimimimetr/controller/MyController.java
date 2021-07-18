@@ -49,8 +49,8 @@ public class MyController {
         return "voting";
     }
 
-    @PostMapping(value = "/voting", consumes = "application/json", produces = "application/json")
-    public void updateCatsScore(@RequestBody int id) {
+    @PostMapping(value = "/voting", consumes = "application/json")
+    public void updateCatsScore(@RequestBody Long id) {
         catService.updateCatScore(id);
     }
 }

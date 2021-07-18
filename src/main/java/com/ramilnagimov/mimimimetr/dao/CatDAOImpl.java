@@ -40,18 +40,19 @@ public class CatDAOImpl implements CatDAO {
     }
 
     @Override
-    public void updateCatScore(int id) {
+    public void updateCatScore(Long id) {
 
         Session session = entityManager.unwrap(Session.class);
+//        Query query = session.createQuery("Update Cat SET score =: score where id =: id");
+//        query.setParameter("score", getCatsScoreByID(id) + 1);
+//        query.executeUpdate();
         Cat cat = session.createQuery("from Cat where id =: id", Cat.class).uniqueResult();
         cat.setScore(cat.getScore() + 1);
-        Query query = session.createQuery("Update Cat SET score =: score where id =: id");
-        query.setParameter("score", getCatsScoreByID(id) + 1);
-        query.executeUpdate();
+        session.saveOrUpdate(cat);
     }
 
     @Override
-    public int getCatsScoreByID(int id) {
+    public int getCatsScoreByID(Long id) {
         int score;
         Session session = entityManager.unwrap(Session.class);
         Cat cat = session.load(Cat.class, id);
