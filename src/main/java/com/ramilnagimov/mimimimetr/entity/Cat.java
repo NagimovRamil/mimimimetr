@@ -17,10 +17,15 @@ public class Cat implements Comparable<Cat> {
     @Column(name = "score")
     private Integer score;
 
+    @Column(name = "image", columnDefinition = "blob")
+    private byte[] image;
+
+
+
     public Cat() {
     }
 
-    public Cat(Long id, String cats_name, int score) {
+    public Cat(Long id, String cats_name, Integer score, byte[] image) {
         this.id = id;
         this.cats_name = cats_name;
         this.score = score;
@@ -46,8 +51,25 @@ public class Cat implements Comparable<Cat> {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(Integer score) {
         this.score = score;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+//    public String getImageInBase64() {
+//        imageInBase64 = ImageDecoder.decodeImageToBase64(image);
+//        return imageInBase64;
+//    }
+//
+//    public void setImageInBase64(String imageInBase64) {
+//        this.imageInBase64 = imageInBase64;
+//    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     @Override
@@ -68,5 +90,6 @@ public class Cat implements Comparable<Cat> {
     public int hashCode() {
         return Objects.hash(id, cats_name);
     }
+
 }
 
