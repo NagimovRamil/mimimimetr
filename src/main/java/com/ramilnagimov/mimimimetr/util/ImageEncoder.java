@@ -9,8 +9,6 @@ public class ImageEncoder {
         this.imageEncoder = imageEncoder;
     }
 
-
-
     public static String encodeImageToBase64 (byte[] array) {
         return new String(Base64.getMimeEncoder().encode(array));
     }

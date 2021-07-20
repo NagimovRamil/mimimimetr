@@ -9,7 +9,7 @@ public interface CatService {
 
     List<Cat> getTopCats();
 
-    List<Cat> getListOfCats();
+    List<Cat> fetchNextPairOfCats();
 
     void updateCatScore(Long id);
 }

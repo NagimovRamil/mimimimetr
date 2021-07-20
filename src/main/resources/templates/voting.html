@@ -23,35 +23,34 @@
         <p style="font-family:'Comic Sans MS',sans-serif;">Кто из них мимимишнее? Кликни по фотографии!</p>
     </h3>
 </div>
-<div align="center">
-    <table>
+<div>
+    <table class="twoCat">
         <tr>
             <td>
-                <img th:id="${cat1.id}"
-                     th:src="${'data:image/png;base64, '+ cat1base64}"
+                <img th:id="${catLeft.id}"
+                     th:src="${'data:image/png;base64, '+ catLeftBase64}"
                      class="size" onclick="voting(this.id)">
             </td>
+
             <td>
-                <img th:id="${cat2.id}"
-                     th:src="${'data:image/png;base64, '+ cat2base64}"
+                <img th:id="${catRight.id}"
+                     th:src="${'data:image/png;base64, '+ catRightBase64}"
                      class="size" onclick="voting(this.id)">
-
             </td>
         </tr>
+
         <tr>
-
-            <td align="center">
-                <input th:id="${cat1.id}" type="button" th:value="${cat1.cats_name}" onclick="voting(this.id)">
+            <td>
+                <input th:id="${catLeft.id}" type="button" th:value="${catLeft.cats_name}" onclick="voting(this.id)">
             </td>
 
-
-            <td align="center">
-                <input th:id="${cat2.id}" type="button" th:value="${cat2.cats_name}" onclick="voting(this.id)">
+            <td>
+                <input th:id="${catRight.id}" type="button" th:value="${catRight.cats_name}" onclick="voting(this.id)">
             </td>
         </tr>
+
     </table>
 </div>
-</table>
 </body>
 
 <script>

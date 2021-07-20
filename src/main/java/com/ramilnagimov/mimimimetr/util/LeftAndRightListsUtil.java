@@ -10,12 +10,12 @@ import java.util.*;
 
 @Component
 @SessionScope
-public class CatLinkedListUtil {
+public class LeftAndRightListsUtil {
 
     private final List<LinkedList<Cat>> cats = new ArrayList<LinkedList<Cat>>();
     private final CatDAO catDAO;
 
-    public CatLinkedListUtil(CatDAO catDAO) {
+    public LeftAndRightListsUtil(CatDAO catDAO) {
         this.catDAO = catDAO;
     }
 
@@ -23,19 +23,19 @@ public class CatLinkedListUtil {
     public void initMethod() {
         List<Cat> allCats = catDAO.getAllCats();
         Collections.shuffle(allCats);
-        LinkedList<Cat> catLinkedList1 = new LinkedList<>();
-        LinkedList<Cat> catLinkedList2 = new LinkedList<>();
+        LinkedList<Cat> catsLeft = new LinkedList<>();
+        LinkedList<Cat> catsRight = new LinkedList<>();
         for (int i = 0; i < allCats.size(); i++) {
             for (int j = i + 1; j < allCats.size(); j++) {
-                    catLinkedList1.add(allCats.get(i));
-                    catLinkedList2.add(allCats.get(j));
+                    catsLeft.add(allCats.get(i));
+                    catsRight.add(allCats.get(j));
             }
         }
-        cats.add(catLinkedList1);
-        cats.add(catLinkedList2);
+        cats.add(catsLeft);
+        cats.add(catsRight);
     }
 
-    public List<LinkedList<Cat>> getLinkedListsOfCats() {
+    public List<LinkedList<Cat>> getListOfLeftAndRightLists() {
         return cats;
     }
 }

@@ -12,14 +12,14 @@
         counter-reset: schetchik; /* счётчик с названием "schetchik" работает в рамках класса .kotiki  */
     }
 
-    .kotiki tbody tr:nth-child(n+2) {
+    .kotiki tbody tr:nth-child(n+1) {
         counter-increment: schetchik;
     }
 
     .kotiki td,
     .kotiki tr:before {
         padding: .1em .5em;
-        border: 1px solid #E7D5C0;
+        border: 0px solid #E7D5C0;
     }
 
     .kotiki tr:before {
@@ -29,7 +29,7 @@
         color: #978777;
     }
 
-    .kotiki tbody tr:nth-child(-n+1):before {
+    .kotiki tbody tr:nth-child(-n):before {
         content: "";
     }
 
@@ -46,15 +46,17 @@
 <br>
 
 <table class="kotiki" style="font-family:'Comic Sans MS',sans-serif;">
-    <tr>
-        <th>Имя</th>
-        <th>Счет</th>
-    </tr>
 
-    <tr th:each="cat,iterStat: ${topCats}" th:if="${iterStat.index} <10">
-        <td th:text="${cat.cats_name}"></td>
-        <td th:text="${cat.score}"></td>
-    </tr> <!-- iterStat переменная для указания количества перебираемых элементов, в нашем случае ограничение 10>-->
+    <tr th:each="catAndImageForViewTopNames: ${catList}">
+
+        <td th:text="${catAndImageForViewTopNames.cats_name}">
+        </td>
+
+        <td>
+            <img th:src="${'data:image/png;base64, '+ catAndImageForViewTopNames.catBase64}">
+        </td>
+
+    </tr>
 
 </table>
 </body>
