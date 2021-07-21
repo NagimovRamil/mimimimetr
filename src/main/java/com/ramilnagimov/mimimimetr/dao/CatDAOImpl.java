@@ -25,7 +25,7 @@ public class CatDAOImpl implements CatDAO {
     @Override
     public List<Cat> getTopCats() {
         Session session = entityManager.unwrap(Session.class);
-        List<Cat> allCats = session.createQuery("from Cat", Cat.class).getResultList();
+        List<Cat> allCats = session.createQuery("FROM Cat", Cat.class).getResultList();
         allCats.sort(Collections.reverseOrder());
         List<Cat> topCats = allCats.stream().limit(10).collect(Collectors.toList());
 
@@ -35,7 +35,7 @@ public class CatDAOImpl implements CatDAO {
     @Override
     public List<Cat> getAllCats() {
         Session session = entityManager.unwrap(Session.class);
-        List<Cat> allCats = session.createQuery("from Cat", Cat.class).getResultList();
+        List<Cat> allCats = session.createQuery("FROM Cat", Cat.class).getResultList();
 
         return allCats;
     }
@@ -45,7 +45,7 @@ public class CatDAOImpl implements CatDAO {
     @Transactional
     public void updateCatScore(@Param("id") Long id) {
         Session session = entityManager.unwrap(Session.class);
-        Query updateScore = session.createQuery("update Cat set score = score+1 where id = :idOfUpdatingCat").setParameter("idOfUpdatingCat", id);
+        Query updateScore = session.createQuery("UPDATE Cat SET score = score+1 WHERE id = :idOfUpdatingCat").setParameter("idOfUpdatingCat", id);
         updateScore.executeUpdate();
     }
 }

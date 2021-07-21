@@ -12,7 +12,7 @@ import java.util.*;
 @SessionScope
 public class LeftAndRightListsUtil {
 
-    private final List<LinkedList<Cat>> cats = new ArrayList<LinkedList<Cat>>();
+    private final List<LinkedList<Cat>> cats = new ArrayList<>();
     private final CatDAO catDAO;
 
     public LeftAndRightListsUtil(CatDAO catDAO) {

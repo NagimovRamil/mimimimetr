@@ -2,11 +2,10 @@ package com.ramilnagimov.mimimimetr.controller;
 
 import com.ramilnagimov.mimimimetr.entity.Cat;
 import com.ramilnagimov.mimimimetr.service.CatService;
-import com.ramilnagimov.mimimimetr.util.NameAndImageForViewTopCats;
 import com.ramilnagimov.mimimimetr.util.ImageEncoder;
+import com.ramilnagimov.mimimimetr.util.NameAndImageForViewTopCats;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,21 +21,6 @@ public class CatController {
         this.catService = catService;
     }
 
-    @RequestMapping("/top-cats")
-    public String showTopCats(Model model) {
-        List<NameAndImageForViewTopCats> catAndImageForViewTopNames = new LinkedList<>();
-        List<Cat> topCats = catService.getTopCats();
-        for(Cat cat: topCats) {
-            String catBase64 = ImageEncoder.encodeImageToBase64(cat.getImage());
-            NameAndImageForViewTopCats newCat = new NameAndImageForViewTopCats(cat.getCats_name(), catBase64);
-            catAndImageForViewTopNames.add(newCat);
-        }
-
-        model.addAttribute("catList", catAndImageForViewTopNames);
-
-        return "top-cats";
-    }
-
     @RequestMapping("/voting")
     public String voting(Model model, @RequestBody(required=false) Long id ) {
 
@@ -50,7 +34,6 @@ public class CatController {
                 NameAndImageForViewTopCats newCat = new NameAndImageForViewTopCats(cat.getCats_name(), catBase64);
                 catAndImageForViewTopNames.add(newCat);
             }
-
             model.addAttribute("catList", catAndImageForViewTopNames);
             return "top-cats";
         }
@@ -65,9 +48,7 @@ public class CatController {
         model.addAttribute("catRight", catRight);
         model.addAttribute("catRightBase64", catRightBase64);
 
-        if(!(id ==null)) {
-            catService.updateCatScore(id);
-        }
+        if(!(id ==null)) catService.updateCatScore(id);
 
         return "voting";
     }

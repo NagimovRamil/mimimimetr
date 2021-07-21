@@ -20,47 +20,19 @@ public class Cat implements Comparable<Cat> {
     @Column(name = "image", columnDefinition = "blob")
     private byte[] image;
 
-
-
     public Cat() {
-    }
-
-    public Cat(Long id, String cats_name, Integer score, byte[] image) {
-        this.id = id;
-        this.cats_name = cats_name;
-        this.score = score;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getCats_name() {
         return cats_name;
     }
 
-    public void setCats_name(String cats_name) {
-        this.cats_name = cats_name;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
-    }
-
     public byte[] getImage() {
         return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
     }
 
     @Override
