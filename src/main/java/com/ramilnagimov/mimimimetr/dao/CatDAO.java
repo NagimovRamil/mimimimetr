@@ -10,6 +10,4 @@ public interface CatDAO {
     List<Cat> getAllCats();
 
     void updateCatScore(Long id);
-
-    int getCatsScoreByID(Long id);
 }

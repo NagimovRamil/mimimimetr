@@ -29,23 +29,23 @@
             <td>
                 <img th:id="${catLeft.id}"
                      th:src="${'data:image/png;base64, '+ catLeftBase64}"
-                     class="size" onclick="voting(this.id)">
+                     class="size" onclick="voting({ID : this.id})">
             </td>
 
             <td>
                 <img th:id="${catRight.id}"
                      th:src="${'data:image/png;base64, '+ catRightBase64}"
-                     class="size" onclick="voting(this.id)">
+                     class="size" onclick="voting({ID : this.id})">
             </td>
         </tr>
 
         <tr>
             <td>
-                <input th:id="${catLeft.id}" type="button" th:value="${catLeft.cats_name}" onclick="voting(this.id)">
+                <input th:id="${catLeft.id}" type="button" th:value="${catLeft.cats_name}" onclick="voting({ID : this.id})">
             </td>
 
             <td>
-                <input th:id="${catRight.id}" type="button" th:value="${catRight.cats_name}" onclick="voting(this.id)">
+                <input th:id="${catRight.id}" type="button" th:value="${catRight.cats_name}" onclick="voting({ID : this.id})">
             </td>
         </tr>
 
@@ -54,15 +54,20 @@
 </body>
 
 <script>
-    function voting(ID) {
+    function voting({ID}) {
         sendRequest(ID, '/voting');
         location.reload();
     }
 
-    function sendRequest(data, url) {
-        var upScore = new XMLHttpRequest();
-        upScore.open('POST', url);
-        upScore.send(data);
+   function sendRequest(data, url) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url, false);
+        // xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        // xhr.send(JSON.stringify({
+        //     value: data
+        // }));
+        xhr.send(data);
     }
 </script>
 

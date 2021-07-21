@@ -38,7 +38,7 @@ public class CatController {
     }
 
     @RequestMapping("/voting")
-    public String voting(Model model) {
+    public String voting(Model model, @RequestBody(required=false) Long id ) {
 
         List<Cat> cats = catService.fetchNextPairOfCats();
         if (cats.isEmpty())
@@ -65,12 +65,11 @@ public class CatController {
         model.addAttribute("catRight", catRight);
         model.addAttribute("catRightBase64", catRightBase64);
 
-        return "voting";
-    }
+        if(!(id ==null)) {
+            catService.updateCatScore(id);
+        }
 
-    @PostMapping(value = "/voting", consumes = "application/json")
-    public void updateCatsScore(@RequestBody Long id) {
-        catService.updateCatScore(id);
+        return "voting";
     }
 }
 

@@ -59,15 +59,6 @@ public class Cat implements Comparable<Cat> {
         return image;
     }
 
-//    public String getImageInBase64() {
-//        imageInBase64 = ImageDecoder.decodeImageToBase64(image);
-//        return imageInBase64;
-//    }
-//
-//    public void setImageInBase64(String imageInBase64) {
-//        this.imageInBase64 = imageInBase64;
-//    }
-
     public void setImage(byte[] image) {
         this.image = image;
     }
@@ -90,6 +81,5 @@ public class Cat implements Comparable<Cat> {
     public int hashCode() {
         return Objects.hash(id, cats_name);
     }
-
 }
 

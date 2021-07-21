@@ -2,10 +2,13 @@ package com.ramilnagimov.mimimimetr.dao;
 
 import com.ramilnagimov.mimimimetr.entity.Cat;
 import org.hibernate.Session;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +24,6 @@ public class CatDAOImpl implements CatDAO {
 
     @Override
     public List<Cat> getTopCats() {
-
         Session session = entityManager.unwrap(Session.class);
         List<Cat> allCats = session.createQuery("from Cat", Cat.class).getResultList();
         allCats.sort(Collections.reverseOrder());
@@ -32,7 +34,6 @@ public class CatDAOImpl implements CatDAO {
 
     @Override
     public List<Cat> getAllCats() {
-
         Session session = entityManager.unwrap(Session.class);
         List<Cat> allCats = session.createQuery("from Cat", Cat.class).getResultList();
 
@@ -40,25 +41,12 @@ public class CatDAOImpl implements CatDAO {
     }
 
     @Override
-    public void updateCatScore(Long id) {
-
+    @Modifying
+    @Transactional
+    public void updateCatScore(@Param("id") Long id) {
         Session session = entityManager.unwrap(Session.class);
-//        Query query = session.createQuery("Update Cat SET score =: score where id =: id");
-//        query.setParameter("score", getCatsScoreByID(id) + 1);
-//        query.executeUpdate();
-        Cat cat = session.createQuery("from Cat where id =: id", Cat.class).uniqueResult();
-        cat.setScore(cat.getScore() + 1);
-        session.saveOrUpdate(cat);
-    }
-
-    @Override
-    public int getCatsScoreByID(Long id) {
-        int score;
-        Session session = entityManager.unwrap(Session.class);
-        Cat cat = session.load(Cat.class, id);
-        score = cat.getScore();
-
-        return score;
+        Query updateScore = session.createQuery("update Cat set score = score+1 where id = :idOfUpdatingCat").setParameter("idOfUpdatingCat", id);
+        updateScore.executeUpdate();
     }
 }
 
