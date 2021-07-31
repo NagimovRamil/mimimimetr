@@ -27,25 +27,25 @@
     <table class="twoCat">
         <tr>
             <td>
-                <img th:id="${catLeft.id}"
+                <img th:id="${catLeftID}"
                      th:src="${'data:image/png;base64, '+ catLeftBase64}"
-                     class="size" onclick="vote({ID : this.id})">
+                     class="size" onclick="vote(this.id)">
             </td>
 
             <td>
-                <img th:id="${catRight.id}"
+                <img th:id="${catRightID}"
                      th:src="${'data:image/png;base64, '+ catRightBase64}"
-                     class="size" onclick="vote({ID : this.id})">
+                     class="size" onclick="vote(this.id)">
             </td>
         </tr>
 
         <tr>
             <td>
-                <input th:id="${catLeft.id}" type="button" th:value="${catLeft.catsName}" onclick="vote({ID : this.id})">
+                <input th:id="${catLeftID}" type="button" th:value="${catLeftName}" onclick="vote(this.id)">
             </td>
 
             <td>
-                <input th:id="${catRight.id}" type="button" th:value="${catRight.catsName}" onclick="vote({ID : this.id})">
+                <input th:id="${catRightID}" type="button" th:value="${catRightName}" onclick="vote(this.id)">
             </td>
         </tr>
 
@@ -54,7 +54,7 @@
 </body>
 
 <script>
-    function vote({ID}) {
+    function vote(ID) {
         sendRequest(ID, '/voting');
         location.reload();
     }
