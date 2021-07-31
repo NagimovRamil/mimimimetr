@@ -6,6 +6,8 @@ import com.ramilnagimov.mimimimetr.util.ImageEncoder;
 import com.ramilnagimov.mimimimetr.util.NameAndImageForViewTopCats;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,8 +23,8 @@ public class CatController {
         this.catService = catService;
     }
 
-    @RequestMapping("/voting")
-    public String voting(Model model, @RequestBody(required=false) Long id ) {
+    @GetMapping("/voting")
+    public String voting(Model model) {
 
         List<Cat> cats = catService.fetchNextPairOfCats();
         if (cats.isEmpty())
@@ -31,7 +33,7 @@ public class CatController {
             List<Cat> topCats = catService.getTopCats();
             for(Cat cat: topCats) {
                 String catBase64 = ImageEncoder.encodeImageToBase64(cat.getImage());
-                NameAndImageForViewTopCats newCat = new NameAndImageForViewTopCats(cat.getCats_name(), catBase64);
+                NameAndImageForViewTopCats newCat = new NameAndImageForViewTopCats(cat.getCatsName(), catBase64);
                 catAndImageForViewTopNames.add(newCat);
             }
             model.addAttribute("catList", catAndImageForViewTopNames);
@@ -48,9 +50,12 @@ public class CatController {
         model.addAttribute("catRight", catRight);
         model.addAttribute("catRightBase64", catRightBase64);
 
-        if(!(id ==null)) catService.updateCatScore(id);
+        return "/voting";
+    }
 
-        return "voting";
+    @PostMapping ("/voting")
+    public void voting(@RequestBody(required=false) Long id ) {
+        if(id !=null) catService.updateCatScore(id);
     }
 }
 

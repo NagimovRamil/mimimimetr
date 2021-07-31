@@ -3,7 +3,7 @@ package com.ramilnagimov.mimimimetr.service;
 
 import com.ramilnagimov.mimimimetr.dao.CatDAO;
 import com.ramilnagimov.mimimimetr.entity.Cat;
-import com.ramilnagimov.mimimimetr.util.LeftAndRightListsUtil;
+import com.ramilnagimov.mimimimetr.util.ListOfPairsOfCatsUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,11 +14,11 @@ import java.util.List;
 @Service
 public class CatServiceImpl implements CatService {
     private final CatDAO catDAO;
-    private final LeftAndRightListsUtil leftAndRightListsUtil;
+    private final ListOfPairsOfCatsUtil listOfPairsOfCatsUtil;
 
-    public CatServiceImpl(LeftAndRightListsUtil leftAndRightListsUtil, CatDAO catDAO) {
-        this.leftAndRightListsUtil = leftAndRightListsUtil;
+    public CatServiceImpl(CatDAO catDAO, ListOfPairsOfCatsUtil listOfPairsOfCatsUtil) {
         this.catDAO = catDAO;
+        this.listOfPairsOfCatsUtil = listOfPairsOfCatsUtil;
     }
 
     @Override
@@ -28,16 +28,12 @@ public class CatServiceImpl implements CatService {
 
     @Override
     public List<Cat> fetchNextPairOfCats() {
-        LinkedList<Cat> leftCatsList = leftAndRightListsUtil.getListOfLeftAndRightLists().get(0);
-        LinkedList<Cat> rightCatsList = leftAndRightListsUtil.getListOfLeftAndRightLists().get(1);
-        if (leftCatsList.isEmpty() || rightCatsList.isEmpty()) {
+        LinkedList<List<Cat>> listOfPairsOfCats =  listOfPairsOfCatsUtil.getListOfPairsOfCats();
+        if (listOfPairsOfCats.isEmpty()) {
             return Collections.emptyList();
         }
-        List<Cat> cats = new ArrayList<>();
-        cats.add(leftCatsList.pollFirst());
-        cats.add(rightCatsList.pollFirst());
 
-        return cats;
+        return listOfPairsOfCats.pollFirst();
     }
 
     @Override
