@@ -16,6 +16,8 @@ import java.util.List;
 @Controller
 public class CatController {
 
+    private int showNextPairOfCatsCounter = 0;
+    private int votingCounter = 1;
     private final CatService catService;
 
     public CatController(CatService catService) {
@@ -24,28 +26,34 @@ public class CatController {
 
     @GetMapping("/voting")
     public String showNextPairOfCats(Model model, @RequestBody(required = false) Long id) {
+        showNextPairOfCatsCounter++;
+        if(showNextPairOfCatsCounter==votingCounter) {
+            List<Cat> cats = catService.fetchNextPairOfCats();
+            if (cats.isEmpty()) {
+                showTopCats(model);
+                return "/top-cats";
+            }
 
-        List<Cat> cats = catService.fetchNextPairOfCats();
-        if (cats.isEmpty()) {
+            Cat catLeft = cats.get(0);
+            String catLeftBase64 = ImageEncoder.encodeImageToBase64(catLeft.getImage());
+            model.addAttribute("catLeft", catLeft);
+            model.addAttribute("catLeftBase64", catLeftBase64);
+            model.addAttribute("catLeftID", catLeft.getId());
+            model.addAttribute("catLeftName", catLeft.getCatsName());
+
+            Cat catRight = cats.get(1);
+            String catRightBase64 = ImageEncoder.encodeImageToBase64(catRight.getImage());
+            model.addAttribute("catRight", catRight);
+            model.addAttribute("catRightBase64", catRightBase64);
+            model.addAttribute("catRightID", catRight.getId());
+            model.addAttribute("catRightName", catRight.getCatsName());
+
+            return "/voting";
+        }
+        else {
             showTopCats(model);
             return "/top-cats";
         }
-
-        Cat catLeft = cats.get(0);
-        String catLeftBase64 = ImageEncoder.encodeImageToBase64(catLeft.getImage());
-        model.addAttribute("catLeft", catLeft);
-        model.addAttribute("catLeftBase64", catLeftBase64);
-        model.addAttribute("catLeftID", catLeft.getId());
-        model.addAttribute("catLeftName", catLeft.getCatsName());
-
-        Cat catRight = cats.get(1);
-        String catRightBase64 = ImageEncoder.encodeImageToBase64(catRight.getImage());
-        model.addAttribute("catRight", catRight);
-        model.addAttribute("catRightBase64", catRightBase64);
-        model.addAttribute("catRightID", catRight.getId());
-        model.addAttribute("catRightName", catRight.getCatsName());
-
-        return "/voting";
     }
 
     public void showTopCats(Model model) {
@@ -61,6 +69,7 @@ public class CatController {
 
     @PostMapping("/voting")
     public void voting(@RequestBody(required = false) Long id) {
+            votingCounter++;
             catService.updateCatScore(id);
     }
 }
