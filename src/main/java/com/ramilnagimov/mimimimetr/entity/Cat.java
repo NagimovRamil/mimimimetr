@@ -12,7 +12,7 @@ public class Cat implements Comparable<Cat> {
     private Long id;
 
     @Column(name = "cats_name")
-    private String cats_name;
+    private String catsName;
 
     @Column(name = "score")
     private Integer score;
@@ -27,12 +27,16 @@ public class Cat implements Comparable<Cat> {
         return id;
     }
 
-    public String getCats_name() {
-        return cats_name;
+    public String getCatsName() {
+        return catsName;
     }
 
     public byte[] getImage() {
         return image;
+    }
+
+    public Integer getScore() {
+        return score;
     }
 
     @Override
@@ -46,12 +50,12 @@ public class Cat implements Comparable<Cat> {
         if (o == null || getClass() != o.getClass()) return false;
         Cat cat = (Cat) o;
         return id.equals(cat.id) &&
-                Objects.equals(cats_name, cat.cats_name);
+                Objects.equals(catsName, cat.catsName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, cats_name);
+        return Objects.hash(id, catsName);
     }
 }
 

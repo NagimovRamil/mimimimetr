@@ -3,16 +3,16 @@
 <head>
     <title>Mimimimetr</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="../styles/style.css">
+
 </head>
 <body>
-
 <style>
     .twoCat {
         margin: 0 auto;
         text-align: center;
     }
 </style>
-
 <div style="text-align: center;">
     <h1>
         <p style="font-family:'Comic Sans MS',sans-serif;">Мимимиметр</p>
@@ -27,44 +27,42 @@
     <table class="twoCat">
         <tr>
             <td>
-                <img th:id="${catLeft.id}"
+                <img th:id="${catLeftID}"
                      th:src="${'data:image/png;base64, '+ catLeftBase64}"
-                     class="size" onclick="voting({ID : this.id})">
+                     class="size" onclick="vote(this.id)">
             </td>
 
             <td>
-                <img th:id="${catRight.id}"
+                <img th:id="${catRightID}"
                      th:src="${'data:image/png;base64, '+ catRightBase64}"
-                     class="size" onclick="voting({ID : this.id})">
+                     class="size" onclick="vote(this.id)">
             </td>
         </tr>
 
         <tr>
             <td>
-                <input th:id="${catLeft.id}" type="button" th:value="${catLeft.cats_name}" onclick="voting({ID : this.id})">
+                <input th:id="${catLeftID}" type="button" th:value="${catLeftName}" onclick="vote(this.id)">
             </td>
 
             <td>
-                <input th:id="${catRight.id}" type="button" th:value="${catRight.cats_name}" onclick="voting({ID : this.id})">
+                <input th:id="${catRightID}" type="button" th:value="${catRightName}" onclick="vote(this.id)">
             </td>
         </tr>
 
     </table>
 </div>
-</body>
-
 <script>
-    function voting({ID}) {
+    function vote(ID) {
         sendRequest(ID, '/voting');
         location.reload();
     }
 
-   function sendRequest(data, url) {
+    function sendRequest(data, url) {
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", url, false);
+        xhr.open('POST', url, false);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(data);
     }
 </script>
-
+</body>
 </html>
