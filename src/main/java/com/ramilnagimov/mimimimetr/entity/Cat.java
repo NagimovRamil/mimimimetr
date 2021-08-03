@@ -35,6 +35,10 @@ public class Cat implements Comparable<Cat> {
         return image;
     }
 
+    public Integer getScore() {
+        return score;
+    }
+
     @Override
     public int compareTo(Cat cat) {
         return score.compareTo(cat.score);

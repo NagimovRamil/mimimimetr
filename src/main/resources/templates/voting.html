@@ -3,16 +3,16 @@
 <head>
     <title>Mimimimetr</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="../styles/style.css">
+
 </head>
 <body>
-
 <style>
     .twoCat {
         margin: 0 auto;
         text-align: center;
     }
 </style>
-
 <div style="text-align: center;">
     <h1>
         <p style="font-family:'Comic Sans MS',sans-serif;">Мимимиметр</p>
@@ -51,21 +51,18 @@
 
     </table>
 </div>
-</body>
-
 <script>
     function vote(ID) {
         sendRequest(ID, '/voting');
         location.reload();
     }
 
-   function sendRequest(data, url) {
+    function sendRequest(data, url) {
         var xhr = new XMLHttpRequest();
         xhr.open('POST', url, false);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(data);
     }
-
 </script>
-
+</body>
 </html>

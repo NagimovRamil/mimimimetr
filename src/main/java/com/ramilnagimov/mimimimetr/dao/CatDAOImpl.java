@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public class CatDAOImpl implements CatDAO {
 
-    private final EntityManager entityManager;
+    public EntityManager entityManager;
 
     public CatDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
