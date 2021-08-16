@@ -4,6 +4,7 @@ import com.ramilnagimov.mimimimetr.entity.Cat;
 import com.ramilnagimov.mimimimetr.service.CatService;
 import com.ramilnagimov.mimimimetr.util.ImageEncoder;
 import com.ramilnagimov.mimimimetr.util.NameAndImageForViewTopCats;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Controller
+@Scope("Prototype")
 public class CatController {
 
     private int showNextPairOfCatsCounter = 0;
